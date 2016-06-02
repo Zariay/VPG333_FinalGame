@@ -1,12 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
+    public int lives;
 
-[HideInInspector] 
+    [HideInInspector]
     public bool facingRight = true;
-[HideInInspector]
+    //jumping
+    #region
+    [HideInInspector]
     public bool jump = false;
+    [HideInInspector]
+    public bool doubleJump = false;
+    [HideInInspector]
+    public bool doubleJumpEnabled = false;
+    #endregion
+
+    //projectile
+    #region
+    [HideInInspector]
+    public bool fireBallEnabled = false;
+    public GameObject fireBall;
+    public string fireButton = "Fire1";
+    public float fireForce = 100f;
+    public Transform firePoint;
+    #endregion
 
     public float moveForce = 365f;
     public float maxSpeed = 5f;
@@ -20,20 +39,53 @@ public class PlayerController : MonoBehaviour {
 
 
     // Use this for initialization
-    void Awake () 
+    void Awake()
     {
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
     }
-    
+
     // Update is called once per frame
-    void Update () 
+    void Update()
     {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
-        if (Input.GetButtonDown("Jump") && grounded)
+        while (doubleJumpEnabled == false)
         {
-            jump = true;
+            if (Input.GetButtonDown("Jump") && grounded)
+            {
+                jump = true;
+            }
+            if (doubleJumpEnabled == true)
+                break;
+        }
+        
+        while(doubleJumpEnabled == true)
+        {
+            if (Input.GetButtonDown("Jump") && grounded)
+            {
+                jump = true;
+            }
+            else if(doubleJump == false)
+            {
+                doubleJump = true;
+            }
+        }
+
+        if(fireBallEnabled)
+        {
+            if (Input.GetButtonDown(fireButton))
+            {
+                Vector3 firePosition = firePoint.position;
+                GameObject b = GameObject.Instantiate(fireBall, firePosition, firePoint.rotation) as GameObject;
+
+                if (b != null)
+                {
+                    Rigidbody rb = b.GetComponent<Rigidbody>();
+                    Vector3 force = firePoint.forward * fireForce;
+                    rb.AddForce(force);
+                }
+            }
         }
     }
 
@@ -46,19 +98,24 @@ public class PlayerController : MonoBehaviour {
         if (h * rb2d.velocity.x < maxSpeed)
             rb2d.AddForce(Vector2.right * h * moveForce);
 
-        if (Mathf.Abs (rb2d.velocity.x) > maxSpeed)
-            rb2d.velocity = new Vector2(Mathf.Sign (rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
+        if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
+            rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 
-    //    if (h > 0 && !facingRight)
-      //      Flip ();
+        //    if (h > 0 && !facingRight)
+        //      Flip ();
         //else if (h < 0 && facingRight)
-          //  Flip ();
+        //  Flip ();
 
         if (jump)
         {
             //anim.SetTrigger("Jump");
             rb2d.AddForce(new Vector2(0f, jumpForce));
             jump = false;
+        }
+        else if(doubleJump)
+        {
+            rb2d.AddForce(new Vector2(0f, jumpForce / 2));
+            doubleJump = false;
         }
     }
 
