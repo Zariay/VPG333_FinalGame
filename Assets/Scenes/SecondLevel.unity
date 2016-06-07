@@ -553,9 +553,39 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11432162, guid: 1a5c4f53008b46c4fb2d33a83223871b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1a5c4f53008b46c4fb2d33a83223871b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1543291883 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 188692, guid: 1a5c4f53008b46c4fb2d33a83223871b, type: 2}
+  m_PrefabInternal: {fileID: 1543291882}
+--- !u!114 &1543291884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1543291883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 758d0d75dbd785141805e99e1da06b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: 0
+  facingRight: 1
+  jump: 0
+  doubleJump: 0
+  doubleJumpEnabled: 0
+  fireBallEnabled: 0
+  fireBall: {fileID: 0}
+  fireButton: Fire1
+  fireForce: 100
+  firePoint: {fileID: 0}
+  moveSpeed: 1500
+  maxSpeed: 20
+  jumpSpeed: 2000
+  groundCheck: {fileID: 0}
 --- !u!1 &1871260854
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class Goal : MonoBehaviour {
-    
-
-    void OnTriggerEnter2D(Collider2D other)
+public class Goal : MonoBehaviour
+{
+    void OnTriggerEnter2D( Collider2D other )
     {
-        Application.LoadLevel(Application.loadedLevel+1);
-       
+        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex );
     }
 }

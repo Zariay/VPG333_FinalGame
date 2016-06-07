@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class UIBehaviour : MonoBehaviour {
+public class UIBehaviour : MonoBehaviour
+{
     public void LoadLevel()
     {
-        Application.LoadLevel(Application.loadedLevel+1);
+        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex );
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+        SceneManager.UnloadScene( SceneManager.GetActiveScene().buildIndex );
     }
 
     public void Restart()
     {
-        Application.LoadLevel("FirstLevelFIXED");
+        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex );
     }
-   
+
 }

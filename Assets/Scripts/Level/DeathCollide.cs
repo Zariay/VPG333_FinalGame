@@ -1,25 +1,25 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class DeathCollide : MonoBehaviour {
+public class DeathCollide : MonoBehaviour
+{
     private bool isDead = false;
-
-
     void Update()
     {
-        if (Input.GetButtonDown("Reset"))
+        if( Input.GetButtonDown( "Reset" ) )
         {
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex );
         }
     }
- void OnTriggerEnter2D(Collider2D other)
-   {
-       if (other.name == "Player")
-       {
-           Debug.Log("Me");
-           Destroy(other.gameObject);
-           isDead = true;
-       }
-   }
+    void OnTriggerEnter2D( Collider2D other )
+    {
+        if( other.name == "Player" )
+        {
+            Debug.Log( "Me" );
+            Destroy( other.gameObject );
+            isDead = true;
+        }
+    }
 
 }

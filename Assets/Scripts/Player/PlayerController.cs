@@ -27,42 +27,39 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     #endregion
 
-    public float moveForce = 365f;
+    public float moveSpeed;
     public float maxSpeed = 5f;
-    public float jumpForce = 1000f;
+    public float jumpSpeed;
     public Transform groundCheck;
 
 
     private bool grounded = false;
-    private Animator anim;
     private Rigidbody2D rb2d;
+    private Vector2 moveForce;
+    private Vector2 jumpForce;
 
-
-    // Use this for initialization
-    void Awake()
+    void Start()
     {
-        anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        jumpForce = new Vector2( 0, jumpSpeed );
+        moveForce = new Vector2( moveSpeed, 0 );  
     }
 
-    // Update is called once per frame
     void Update()
     {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         while (doubleJumpEnabled == false)
         {
-            if (Input.GetButtonDown("Jump") && grounded)
+            if (Input.GetButton("Jump") && grounded)
             {
                 jump = true;
             }
-            if (doubleJumpEnabled == true)
-                break;
         }
         
         while(doubleJumpEnabled == true)
         {
-            if (Input.GetButtonDown("Jump") && grounded)
+            if (Input.GetButton("Jump") && grounded)
             {
                 jump = true;
             }
@@ -72,7 +69,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(fireBallEnabled)
+        if(fireBallEnabled == true)
         {
             if (Input.GetButtonDown(fireButton))
             {
@@ -93,32 +90,43 @@ public class PlayerController : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal");
 
-        anim.SetFloat("Speed", Mathf.Abs(h));
-
         if (h * rb2d.velocity.x < maxSpeed)
-            rb2d.AddForce(Vector2.right * h * moveForce);
+            rb2d.AddForce(h*moveForce, ForceMode2D.Impulse);
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
-
-        //    if (h > 0 && !facingRight)
-        //      Flip ();
-        //else if (h < 0 && facingRight)
-        //  Flip ();
-
-        if (jump)
+        else if (h ==0)
         {
-            //anim.SetTrigger("Jump");
-            rb2d.AddForce(new Vector2(0f, jumpForce));
+            if( rb2d.velocity.x <= maxSpeed )
+            {
+                rb2d.velocity = new Vector2( 0, rb2d.velocity.y );
+            }
+            if( rb2d.velocity.x >= maxSpeed )
+            {
+                rb2d.velocity = Vector2.zero;
+            }
+        }
+
+        //Jumping
+        if (jump == true && grounded == true)
+        {
+            rb2d.AddForce(jumpForce);
             jump = false;
         }
-        else if(doubleJump)
+        else if(doubleJump == true && grounded == false)
         {
-            rb2d.AddForce(new Vector2(0f, jumpForce / 2));
+            rb2d.AddForce(jumpForce / 2);
             doubleJump = false;
         }
     }
 
+    void OnCollisionEnter2D( Collision2D col )
+    {
+        if( col.gameObject.CompareTag( "ground" ) )
+        {
+            grounded = true;
+        }
+    }
 
     void Flip()
     {
