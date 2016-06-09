@@ -10,10 +10,8 @@ public class PlayerController : MonoBehaviour
     //jumping
     #region
     [HideInInspector]
-    public bool jump = false;
-    [HideInInspector]
     public bool doubleJump = false;
-    [HideInInspector]
+
     public bool doubleJumpEnabled = false;
     #endregion
 
@@ -53,18 +51,26 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButton("Jump") && grounded)
             {
-                jump = true;
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                rb2d.AddForce(jumpForce);
             }
         }
         else
         {
             if (Input.GetButton("Jump") && grounded)
             {
-                jump = true;
-            }
-            else if(doubleJump == false)
-            {
+                rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                rb2d.AddForce(jumpForce);
                 doubleJump = true;
+            }
+            else
+            {
+                if(doubleJump == true)
+                {
+                    doubleJump = false;
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                    rb2d.AddForce(jumpForce / 2);
+                }
             }
         }
 
@@ -72,13 +78,13 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetButtonDown(fireButton))
             {
-                Vector3 firePosition = firePoint.position;
+                Vector2 firePosition = firePoint.position;
                 GameObject b = GameObject.Instantiate(fireBall, firePosition, firePoint.rotation) as GameObject;
 
                 if (b != null)
                 {
-                    Rigidbody rb = b.GetComponent<Rigidbody>();
-                    Vector3 force = firePoint.forward * fireForce;
+                    Rigidbody2D rb = b.GetComponent<Rigidbody2D>();
+                    Vector2 force = firePoint.forward * fireForce;
                     rb.AddForce(force);
                 }
             }
@@ -96,26 +102,14 @@ public class PlayerController : MonoBehaviour
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
         else if (h == 0)
         {
-            if( rb2d.velocity.x <= maxSpeed )
+            if (rb2d.velocity.x <= maxSpeed)
             {
-                rb2d.velocity = new Vector2( 0, rb2d.velocity.y );
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
-            if( rb2d.velocity.x >= maxSpeed )
+            if (rb2d.velocity.x >= maxSpeed)
             {
                 rb2d.velocity = Vector2.zero;
             }
-        }
-
-        //Jumping
-        if (jump == true && grounded == true)
-        {
-            rb2d.AddForce(jumpForce);
-            jump = false;
-        }
-        else if(doubleJump == true && grounded == false)
-        {
-            rb2d.AddForce(jumpForce / 2);
-            doubleJump = false;
         }
     }
 
@@ -124,6 +118,11 @@ public class PlayerController : MonoBehaviour
         if( col.gameObject.CompareTag( "ground" ) )
         {
             grounded = true;
+        }
+
+        if (col.gameObject.CompareTag("PickUp"))
+        {
+            Destroy(col.gameObject);
         }
     }
 

@@ -4,13 +4,12 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int startingHealth = 100;                            
+    public int startingHealth = 30;                            
     public int currentHealth;                                   
     public Slider healthSlider;                                
 
     Animator anim;                                              
     bool isDead;                                           
-    bool damaged;
     public PlayerController player;
 
     void Awake()
