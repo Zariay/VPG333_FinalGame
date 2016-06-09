@@ -10,7 +10,6 @@ public class EnemyController : MonoBehaviour
     public float playerRange;
     public bool playerInRange;
     public LayerMask playerLayer;
-    public int damage = 2;
 
     void Start()
     {
@@ -33,11 +32,8 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collision2D other)
     {
-        if(other.gameObject.CompareTag("Player"))
-            playerHealth.TakeDamage(damage);
-
         if (other.gameObject.CompareTag("Bounce"))
             moveSpeed *= -1;
     }

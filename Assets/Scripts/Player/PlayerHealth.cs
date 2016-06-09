@@ -24,7 +24,6 @@ public class PlayerHealth : MonoBehaviour
        
     }
 
-
     public void TakeDamage( int amount )
     {
         currentHealth -= amount;
@@ -36,7 +35,6 @@ public class PlayerHealth : MonoBehaviour
             Death();
         }
     }
-
 
     void Death()
     {
