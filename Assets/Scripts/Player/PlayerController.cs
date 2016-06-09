@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public bool facingRight = true;
     //jumping
     #region
-    [HideInInspector]
     public bool doubleJump = false;
 
     public bool doubleJumpEnabled = false;
@@ -28,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float maxSpeed = 5f;
     public float jumpSpeed;
-    public float doubleJumpSpeed;
+    public float knockBackSpeed;
     public Transform groundCheck;
 
 
@@ -36,14 +35,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector2 moveForce;
     private Vector2 jumpForce;
-    private Vector2 doubleJumpForce;
+    private Vector2 knockBackForce;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         jumpForce = new Vector2( 0, jumpSpeed );
-        doubleJumpForce = new Vector2(0, doubleJumpSpeed);
-        moveForce = new Vector2( moveSpeed, 0 );  
+        moveForce = new Vector2( moveSpeed, 0 );
+        knockBackForce = new Vector2(knockBackSpeed, 0);
     }
 
     void Update()
@@ -74,7 +73,7 @@ public class PlayerController : MonoBehaviour
                     if (doubleJump == true)
                     { 
                         rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-                        rb2d.AddForce(doubleJumpForce);
+                        rb2d.AddForce(jumpForce);
                         doubleJump = false;
                     }
                 }
@@ -130,6 +129,11 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("PickUp"))
         {
             Destroy(col.gameObject);
+        }
+
+        if(col.gameObject.CompareTag("GroundEnemy"))
+        {
+            col.gameObject.GetComponent<Rigidbody2D>().AddForce(knockBackForce);
         }
     }
 
