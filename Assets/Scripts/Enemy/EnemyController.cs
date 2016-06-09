@@ -25,8 +25,7 @@ public class EnemyController : MonoBehaviour
         {
             transform.Translate(new Vector3(moveSpeed / 2, 0, 0) * Time.deltaTime);
         }
-
-        if (this.gameObject.tag == "FlyingEnemy")
+        else if (this.gameObject.tag == "FlyingEnemy")
         {
             playerInRange = Physics2D.OverlapCircle(transform.position, playerRange, playerLayer);
             if(playerInRange)
