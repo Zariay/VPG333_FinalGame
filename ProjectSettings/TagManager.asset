@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - ground
+  - Fire
+  - FlyingEnemy
+  - GroundEnemy
+  - Bounce
   layers:
   - Default
   - TransparentFX
@@ -17,8 +21,8 @@ TagManager:
   - Player
   - Ground
   - Background
-  - 
-  - 
+  - Enemy
+  - Bounce
   - 
   - 
   - 
