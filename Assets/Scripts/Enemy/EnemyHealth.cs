@@ -13,7 +13,6 @@ public class EnemyHealth : MonoBehaviour
 
     void Awake()
     {
-
         anim = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider>();
 

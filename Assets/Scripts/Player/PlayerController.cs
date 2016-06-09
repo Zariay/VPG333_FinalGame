@@ -49,15 +49,14 @@ public class PlayerController : MonoBehaviour
     {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
-        while (doubleJumpEnabled == false)
+        if (doubleJumpEnabled == false)
         {
             if (Input.GetButton("Jump") && grounded)
             {
                 jump = true;
             }
         }
-        
-        while(doubleJumpEnabled == true)
+        else
         {
             if (Input.GetButton("Jump") && grounded)
             {
@@ -95,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
-        else if (h ==0)
+        else if (h == 0)
         {
             if( rb2d.velocity.x <= maxSpeed )
             {
