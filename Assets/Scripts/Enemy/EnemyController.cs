@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bounce"))
             moveSpeed *= -1;
