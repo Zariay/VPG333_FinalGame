@@ -135,6 +135,11 @@ public class PlayerController : MonoBehaviour
         {
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(knockBackForce);
         }
+
+        if(col.gameObject.CompareTag("Bounce"))
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), col.gameObject.GetComponent<Collider2D>(), true);
+        }
     }
 
     void Flip()
