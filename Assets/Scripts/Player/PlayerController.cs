@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float maxSpeed = 5f;
     public float jumpSpeed;
+    public float doubleJumpSpeed;
     public Transform groundCheck;
 
 
@@ -35,11 +36,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector2 moveForce;
     private Vector2 jumpForce;
+    private Vector2 doubleJumpForce;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         jumpForce = new Vector2( 0, jumpSpeed );
+        doubleJumpForce = new Vector2(0, doubleJumpSpeed);
         moveForce = new Vector2( moveSpeed, 0 );  
     }
 
@@ -71,7 +74,7 @@ public class PlayerController : MonoBehaviour
                     if (doubleJump == true)
                     { 
                         rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-                        rb2d.AddForce(jumpForce);
+                        rb2d.AddForce(doubleJumpForce);
                         doubleJump = false;
                     }
                 }
