@@ -47,9 +47,10 @@ public class PlayerController : MonoBehaviour
     {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
+        //Jumping
         if (doubleJumpEnabled == false)
         {
-            if (Input.GetButton("Jump") && grounded)
+            if (Input.GetButtonDown("Jump") && grounded)
             {
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 rb2d.AddForce(jumpForce);
@@ -57,19 +58,22 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (Input.GetButton("Jump") && grounded)
+            if (Input.GetButtonDown("Jump"))
             {
-                rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-                rb2d.AddForce(jumpForce);
-                doubleJump = true;
-            }
-            else
-            {
-                if(doubleJump == true)
+                if(grounded == true)
                 {
-                    doubleJump = false;
                     rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-                    rb2d.AddForce(jumpForce / 2);
+                    rb2d.AddForce(jumpForce);
+                    doubleJump = true;
+                }
+                else
+                {
+                    if (doubleJump == true)
+                    { 
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+                        rb2d.AddForce(jumpForce);
+                        doubleJump = false;
+                    }
                 }
             }
         }
