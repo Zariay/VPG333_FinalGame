@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
 
     //projectile
     #region
-    [HideInInspector]
     public bool fireBallEnabled = false;
     public GameObject fireBall;
     public string fireButton = "Fire1";
