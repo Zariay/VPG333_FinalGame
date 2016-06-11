@@ -3,8 +3,8 @@ using System.Collections;
 
 public class FlyingEnemyController : MonoBehaviour
 {
-    Transform player;
     PlayerHealth playerHealth;
+    PlayerController player;
     EnemyHealth enemyHealth;
     public float moveSpeed;
     public float playerRange;
@@ -13,7 +13,7 @@ public class FlyingEnemyController : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindObjectOfType<PlayerController>();
         playerHealth = player.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
     }

@@ -3,14 +3,14 @@ using System.Collections;
 
 public class GroundEnemyController : MonoBehaviour
 {
-    Transform player;               
+    PlayerController player;               
     PlayerHealth playerHealth;      
     EnemyHealth enemyHealth;
     public float moveSpeed;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindObjectOfType<PlayerController>();
         playerHealth = player.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
     }
@@ -19,7 +19,7 @@ public class GroundEnemyController : MonoBehaviour
     {
             transform.Translate(new Vector3(moveSpeed / 2, 0, 0) * Time.deltaTime);
     }
-
+    
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Bounce"))
