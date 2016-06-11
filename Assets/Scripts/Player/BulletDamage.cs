@@ -33,8 +33,10 @@ public class BulletDamage : MonoBehaviour
         }
 
         if (other.CompareTag("Boss"))
+        {
             other.SendMessage("TakeDamage", damage);
-
+        }
+           
         Destroy(gameObject);
     }
 }
