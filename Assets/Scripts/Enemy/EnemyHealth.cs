@@ -45,6 +45,6 @@ public class EnemyHealth : MonoBehaviour
         anim.SetTrigger( "Dead" );
         Destroy( gameObject, 2f );
         objectives.currentEnemiesKilled++;
-        objectives.score++;
+        objectives.score += scoreValue;
     }
 }

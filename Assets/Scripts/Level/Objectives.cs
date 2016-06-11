@@ -21,10 +21,12 @@ public class Objectives : MonoBehaviour
 
     void Update()
     {
-        enemiesKilled.text = currentEnemiesKilled + "/" + maxEnemiesToKill;
-        collectableScore.text = currentCollectables + "/" + maxCollectables;
+        enemiesKilled.text = currentEnemiesKilled.ToString() + "/" + maxEnemiesToKill.ToString();
+        collectableScore.text = currentCollectables.ToString() + "/" + maxCollectables.ToString();
 
         currentTime -= Time.deltaTime;
         timer.text = System.Math.Round(currentTime, 2) + "/" + System.Math.Round(maxTime,2);
+
+        scoreText.text = score.ToString();
     }
 }
