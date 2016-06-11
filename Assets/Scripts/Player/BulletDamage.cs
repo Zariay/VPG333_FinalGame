@@ -27,10 +27,13 @@ public class BulletDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("GroundEnemy") || other.CompareTag("FlyingEnemy") || other.CompareTag("Boss"))
+        if (other.CompareTag("GroundEnemy") || other.CompareTag("FlyingEnemy"))
         {
-            Destroy(gameObject);
-            other.gameObject.SendMessage("TakeDamage", damage);
+            Destroy(other.gameObject);
         }
+
+        if (other.CompareTag("Boss"))
+            other.SendMessage("TakeDamage", damage);
+        Destroy(gameObject);
     }
 }
