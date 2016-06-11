@@ -29,7 +29,7 @@ public class BulletDamage : MonoBehaviour
     {
         if (other.CompareTag("GroundEnemy") || other.CompareTag("FlyingEnemy") || other.CompareTag("Boss"))
         {
-            Destroy(transform.gameObject);
+            Destroy(gameObject);
             other.gameObject.SendMessage("TakeDamage", damage);
         }
     }
