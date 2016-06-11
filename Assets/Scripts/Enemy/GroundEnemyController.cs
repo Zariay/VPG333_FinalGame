@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyController : MonoBehaviour
+public class GroundEnemyController : MonoBehaviour
 {
     Transform player;               
     PlayerHealth playerHealth;      
     EnemyHealth enemyHealth;
     public float moveSpeed;
-    public float playerRange;
-    public bool playerInRange;
-    public LayerMask playerLayer;
 
     void Start()
     {
@@ -20,16 +17,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (this.gameObject.tag == "GroundEnemy")
-        {
             transform.Translate(new Vector3(moveSpeed / 2, 0, 0) * Time.deltaTime);
-        }
-        else if (this.gameObject.tag == "FlyingEnemy")
-        {
-            playerInRange = Physics2D.OverlapCircle(transform.position, playerRange, playerLayer);
-            if(playerInRange)
-                transform.Translate(Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime));
-        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
