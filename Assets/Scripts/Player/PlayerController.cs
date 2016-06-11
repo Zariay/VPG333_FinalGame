@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public int lives;
+    public int lives = 3;
 
     [HideInInspector]
     public bool facingRight = true;
@@ -37,12 +37,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 jumpForce;
     private Vector2 knockBackForce;
 
+    Objectives objectives;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         jumpForce = new Vector2( 0, jumpSpeed );
         moveForce = new Vector2( moveSpeed, 0 );
         knockBackForce = new Vector2(knockBackSpeed, 0);
+        objectives = GameObject.FindObjectOfType<Objectives>();
     }
 
     void Update()

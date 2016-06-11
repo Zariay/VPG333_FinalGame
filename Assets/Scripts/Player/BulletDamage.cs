@@ -31,7 +31,6 @@ public class BulletDamage : MonoBehaviour
         {
             Destroy(transform.gameObject);
             other.gameObject.SendMessage("TakeDamage", damage);
-            objectives.currentEnemiesKilled += 1;
         }
     }
 }

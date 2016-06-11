@@ -16,6 +16,9 @@ public class Objectives : MonoBehaviour
     public float currentTime;
     public Text timer;
 
+    public int score;
+    public Text scoreText;
+
     void Update()
     {
         enemiesKilled.text = currentEnemiesKilled + "/" + maxEnemiesToKill;

@@ -9,13 +9,13 @@ public class EnemyHealth : MonoBehaviour
     Animator anim;                             
     CapsuleCollider capsuleCollider;            
     bool isDead;                 
-    Objectives objects;                             
+    Objectives objectives;                             
 
     void Awake()
     {
         anim = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-
+        objectives = GameObject.FindObjectOfType<Objectives>();
         currentHealth = startingHealth;
     }
 
@@ -44,6 +44,7 @@ public class EnemyHealth : MonoBehaviour
 
         anim.SetTrigger( "Dead" );
         Destroy( gameObject, 2f );
-        objects.currentEnemiesKilled++;
+        objectives.currentEnemiesKilled++;
+        objectives.score++;
     }
 }
