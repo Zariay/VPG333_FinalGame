@@ -2,7 +2,7 @@
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int startingHealth = 100;           
+    public int startingHealth = 2;           
     public int currentHealth;                     
     public int scoreValue = 10;                           
 

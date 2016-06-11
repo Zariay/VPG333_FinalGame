@@ -85,14 +85,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown(fireButton))
             {
                 Vector2 firePosition = firePoint.position;
-                GameObject b = GameObject.Instantiate(fireBall, firePosition, firePoint.rotation) as GameObject;
-
-                if (b != null)
-                {
-                    Rigidbody2D rb = b.GetComponent<Rigidbody2D>();
-                    Vector2 force = firePoint.forward * fireForce;
-                    rb.AddForce(force);
-                }
+                Instantiate(fireBall, firePosition, firePoint.rotation);
             }
         }
     }
@@ -122,24 +115,22 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D( Collision2D col )
     {
         if( col.gameObject.CompareTag( "ground" ) )
-        {
             grounded = true;
-        }
 
         if (col.gameObject.CompareTag("PickUp"))
-        {
             Destroy(col.gameObject);
-        }
 
         if(col.gameObject.CompareTag("GroundEnemy"))
-        {
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(knockBackForce);
-        }
 
         if(col.gameObject.CompareTag("Bounce"))
-        {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), col.gameObject.GetComponent<Collider2D>(), true);
-        }
+
+        if (col.gameObject.CompareTag("DoubleJump"))
+            doubleJumpEnabled = true;
+
+        if (col.gameObject.CompareTag("FireBall"))
+            fireBallEnabled = true;
     }
 
     void Flip()
