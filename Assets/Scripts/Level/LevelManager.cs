@@ -14,7 +14,6 @@ public class LevelManager : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         pHealth = player.GetComponent<PlayerHealth>();
         playerCam = FindObjectOfType<UnityStandardAssets._2D.Camera2DFollow>();
-
     }
 
     void Update()

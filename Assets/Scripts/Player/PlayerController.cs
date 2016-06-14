@@ -140,6 +140,9 @@ public class PlayerController : MonoBehaviour
 
         if (col.gameObject.CompareTag("FireBall"))
             fireBallEnabled = true;
+
+        if (col.gameObject.CompareTag("DeathZone"))
+            transform.GetComponent<PlayerHealth>().Death();
     }
 
     void OnTriggerEnter2D(Collision2D other)
