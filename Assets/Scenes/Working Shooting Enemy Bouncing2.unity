@@ -2538,6 +2538,10 @@ Prefab:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6112492, guid: 1a5c4f53008b46c4fb2d33a83223871b, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11432162, guid: 1a5c4f53008b46c4fb2d33a83223871b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1a5c4f53008b46c4fb2d33a83223871b, type: 2}
@@ -2598,6 +2602,20 @@ MonoBehaviour:
   knockbackLength: 0
   knockbackCount: 0
   knockFromRight: 0
+--- !u!58 &823785332
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 823785327}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1001 &876905111
 Prefab:
   m_ObjectHideFlags: 0
@@ -4334,7 +4352,7 @@ GameObject:
   m_Layer: 0
   m_Name: Fire Point
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5107,9 +5125,8 @@ GameObject:
   - 114: {fileID: 1924755568}
   - 114: {fileID: 1924755566}
   - 61: {fileID: 1924755569}
-  - 50: {fileID: 1924755563}
   - 58: {fileID: 1924755567}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FlyingEnemy
   m_TagString: FlyingEnemy
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -5142,23 +5159,6 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!50 &1924755563
-Rigidbody2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1924755561}
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!33 &1924755564
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5208,7 +5208,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.53
 --- !u!114 &1924755568
 MonoBehaviour:
   m_ObjectHideFlags: 0

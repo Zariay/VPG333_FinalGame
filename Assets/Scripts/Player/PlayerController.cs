@@ -147,7 +147,10 @@ public class PlayerController : MonoBehaviour
             grounded = true;
 
         if (col.gameObject.CompareTag("PickUp"))
+        {
             Destroy(col.gameObject);
+            objectives.score += 5;
+        }   
 
         if(col.gameObject.CompareTag("GroundEnemy"))
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(knockBackForce);

@@ -23,6 +23,6 @@ public class FlyingEnemyController : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.DrawSphere(transform.position, playerRange);
+        Gizmos.DrawWireSphere(transform.position, playerRange);
     }
 }
