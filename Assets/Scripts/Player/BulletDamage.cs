@@ -31,6 +31,7 @@ public class BulletDamage : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
+            objectives.currentEnemiesKilled++;
         }
 
         /*if (other.CompareTag("Boss"))
