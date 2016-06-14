@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 5f;
     public float jumpSpeed;
     public float knockBackSpeed;
+    public Vector2 moveForce;
     public Transform groundCheck;
 
 
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        moveForce = new Vector2(moveSpeed, 0f);
         knockBackForce = new Vector2(knockBackSpeed, 0);
         objectives = FindObjectOfType<Objectives>();
     }
@@ -55,13 +57,13 @@ public class PlayerController : MonoBehaviour
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         //Moving
-        if(Input.GetKey(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.A))
         {
             rb2d.velocity = new Vector2(-moveSpeed, rb2d.velocity.y);
             facingRight = false;
         }
 
-        if(Input.GetKey(KeyCode.D))
+        if(Input.GetKeyDown(KeyCode.D))
         {
             rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
             facingRight = true;
@@ -117,23 +119,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-        if(knockbackCount <= 0)
-        {
-            
-        }
-        else
-        {
-            if(knockFromRight)
-                rb2d.velocity = new Vector2(-knockback, 1f);
-
-            if (!knockFromRight)
-                rb2d.velocity = new Vector2(knockback, 1f);
-        }
-
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
-       
     }
 
     void Jump()
@@ -146,12 +133,6 @@ public class PlayerController : MonoBehaviour
         if( col.gameObject.CompareTag( "ground" ) )
             grounded = true;
 
-        if (col.gameObject.CompareTag("PickUp"))
-        {
-            Destroy(col.gameObject);
-            objectives.score += 5;
-        }   
-
         if(col.gameObject.CompareTag("GroundEnemy"))
             col.gameObject.GetComponent<Rigidbody2D>().AddForce(knockBackForce);
 
@@ -163,6 +144,15 @@ public class PlayerController : MonoBehaviour
 
         if (col.gameObject.CompareTag("FireBall"))
             fireBallEnabled = true;
+    }
+
+    void OnTriggerEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            Destroy(other.gameObject);
+            objectives.score += 5;
+        }
     }
 
     void Flip()

@@ -30,6 +30,7 @@ public class BulletDamage : MonoBehaviour
         if (other.CompareTag("GroundEnemy") || other.CompareTag("FlyingEnemy"))
         {
             Destroy(other.gameObject);
+            Destroy(this.gameObject);
         }
 
         /*if (other.CompareTag("Boss"))
@@ -37,6 +38,6 @@ public class BulletDamage : MonoBehaviour
             other.GetComponent<EnemyHealth>().SendMessage("TakeDamage", damage);
         }*/
            
-        Destroy(this.gameObject);
+       
     }
 }
