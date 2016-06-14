@@ -3,16 +3,10 @@ using System.Collections;
 
 public class GroundEnemyController : MonoBehaviour
 {
-    PlayerController player;               
-    PlayerHealth playerHealth;      
-    EnemyHealth enemyHealth;
     public float moveSpeed;
 
     void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerController>();
-        playerHealth = player.GetComponent<PlayerHealth>();
-        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     void Update()

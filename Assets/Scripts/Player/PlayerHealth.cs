@@ -41,6 +41,5 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
 
         anim.SetTrigger( "Die" );
-        player.enabled = false;
     }
 }

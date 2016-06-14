@@ -9,6 +9,9 @@ TagManager:
   - FlyingEnemy
   - GroundEnemy
   - Bounce
+  - PickUp
+  - DoubleJump
+  - FireBall
   layers:
   - Default
   - TransparentFX
