@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
             rb2d.velocity = new Vector2(0f, 0f);
 
         if (rb2d.velocity.x < 0)
-            transform.localScale = new Vector3(-1f, -1f, -1f);
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         else if (rb2d.velocity.x > 0)
             transform.localScale = new Vector3(1f, 1f, 1f);
 
