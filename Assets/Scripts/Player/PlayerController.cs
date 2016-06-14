@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed = 5f;
     public float jumpSpeed;
     public float knockBackSpeed;
-    public Vector2 moveForce;
     public Transform groundCheck;
 
 
@@ -47,7 +46,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        moveForce = new Vector2(moveSpeed, 0f);
         knockBackForce = new Vector2(knockBackSpeed, 0);
         objectives = FindObjectOfType<Objectives>();
     }
@@ -57,20 +55,18 @@ public class PlayerController : MonoBehaviour
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         //Moving
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             rb2d.velocity = new Vector2(-moveSpeed, rb2d.velocity.y);
             facingRight = false;
         }
-
-        if(Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
             facingRight = true;
         }
-           
-        if (Input.GetKey(KeyCode.S))
-            rb2d.velocity = new Vector2(0f, 0f);
+        else
+            rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
 
         if (rb2d.velocity.x < 0)
             transform.localScale = new Vector3(-1f, 1f, 1f);

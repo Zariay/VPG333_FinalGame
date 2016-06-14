@@ -2542,6 +2542,14 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5052010, guid: 1a5c4f53008b46c4fb2d33a83223871b, type: 2}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5052010, guid: 1a5c4f53008b46c4fb2d33a83223871b, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11432162, guid: 1a5c4f53008b46c4fb2d33a83223871b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1a5c4f53008b46c4fb2d33a83223871b, type: 2}
@@ -2597,6 +2605,7 @@ MonoBehaviour:
   maxSpeed: 15
   jumpSpeed: 40
   knockBackSpeed: 0
+  moveForce: {x: 0, y: 0}
   groundCheck: {fileID: 823785328}
   knockback: 0
   knockbackLength: 0
