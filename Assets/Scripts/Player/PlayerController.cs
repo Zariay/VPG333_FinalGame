@@ -36,6 +36,14 @@ public class PlayerController : MonoBehaviour
     private Vector2 jumpForce;
     private Vector2 knockBackForce;
 
+    //player knockback
+    #region
+    public float knockback;
+    public float knockbackLength;
+    public float knockbackCount;
+    public bool knockFromRight;
+    #endregion
+
     Objectives objectives;
 
     void Start()
@@ -44,7 +52,7 @@ public class PlayerController : MonoBehaviour
         jumpForce = new Vector2( 0, jumpSpeed );
         moveForce = new Vector2( moveSpeed, 0 );
         knockBackForce = new Vector2(knockBackSpeed, 0);
-        objectives = GameObject.FindObjectOfType<Objectives>();
+        objectives = FindObjectOfType<Objectives>();
     }
 
     void Update()
@@ -95,9 +103,20 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
+        
+        if(knockbackCount <= 0)
+        {
+            if (h * rb2d.velocity.x < maxSpeed)
+                rb2d.AddForce(h * moveForce, ForceMode2D.Impulse);
+        }
+        else
+        {
+            if(knockFromRight)
+                rb2d.velocity = new Vector2(-knockback, 1f);
 
-        if (h * rb2d.velocity.x < maxSpeed)
-            rb2d.AddForce(h*moveForce, ForceMode2D.Impulse);
+            if (!knockFromRight)
+                rb2d.velocity = new Vector2(knockback, 1f);
+        }
 
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);

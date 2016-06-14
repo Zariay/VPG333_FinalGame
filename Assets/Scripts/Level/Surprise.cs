@@ -12,8 +12,6 @@ public class Surprise : MonoBehaviour
     void Awake()
     {
         appear.SetActive(false);
-     
-
     }
 
     void OnTriggerEnter2D(Collider2D other)

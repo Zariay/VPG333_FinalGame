@@ -11,9 +11,9 @@ public class LevelManager : MonoBehaviour
     public Slider playerHealth;
     void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<PlayerController>();
         pHealth = player.GetComponent<PlayerHealth>();
-        playerCam = GameObject.FindObjectOfType<UnityStandardAssets._2D.Camera2DFollow>();
+        playerCam = FindObjectOfType<UnityStandardAssets._2D.Camera2DFollow>();
 
     }
 

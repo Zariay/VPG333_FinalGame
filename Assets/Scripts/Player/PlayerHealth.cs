@@ -43,5 +43,6 @@ public class PlayerHealth : MonoBehaviour
         anim.SetTrigger( "Die" );
         player.enabled = false;
         player.fireBallEnabled = false;
+        player.knockbackCount = 0;
     }
 }

@@ -12,8 +12,8 @@ public class BulletDamage : MonoBehaviour
 
     void Start()
     {
-        objectives = GameObject.FindObjectOfType<Objectives>();
-        player = GameObject.FindObjectOfType<PlayerController>();
+        objectives = FindObjectOfType<Objectives>();
+        player = FindObjectOfType<PlayerController>();
         rigidbody2D = GetComponent<Rigidbody2D>();
 
         if (player.transform.localScale.x < 0)
@@ -34,7 +34,7 @@ public class BulletDamage : MonoBehaviour
 
         if (other.CompareTag("Boss"))
         {
-            other.SendMessage("TakeDamage", damage);
+            other.GetComponent<EnemyHealth>().SendMessage("TakeDamage", damage);
         }
            
         Destroy(this.gameObject);

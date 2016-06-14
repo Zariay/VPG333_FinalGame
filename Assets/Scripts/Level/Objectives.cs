@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Objectives : MonoBehaviour
 {
-    public int maxCollectables;
+    public int maxCollectables = 3;
     public int currentCollectables;
     public Text collectableScore;
 
