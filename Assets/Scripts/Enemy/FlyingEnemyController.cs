@@ -11,7 +11,7 @@ public class FlyingEnemyController : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<PlayerController>();
     }
 
     void Update()

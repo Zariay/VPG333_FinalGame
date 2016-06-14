@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         //Jumping
+        #region
         if (doubleJumpEnabled == false)
         {
             if (Input.GetButtonDown("Jump") && grounded)
@@ -89,8 +90,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        #endregion
 
-        if(fireBallEnabled == true)
+        if (fireBallEnabled == true)
         {
             if (Input.GetButtonDown(fireButton))
             {
