@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
         {
             player.enabled = false;
             playerCam.isFollowing = false;
+            objectives.currentTime = 0.0f;
         }
 
         playerHealth.value = pHealth.currentHealth;
