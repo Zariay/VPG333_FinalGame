@@ -6,7 +6,6 @@ public class LevelManager : MonoBehaviour
 {
     PlayerController player;
     public int lives = 3;
-    PlayerHealth pHealth;
     UnityStandardAssets._2D.Camera2DFollow playerCam;
     Objectives objectives;
     public Text livesText;
@@ -31,7 +30,6 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
-        pHealth = player.GetComponent<PlayerHealth>();
         playerCam = FindObjectOfType<UnityStandardAssets._2D.Camera2DFollow>();
         objectives = FindObjectOfType<Objectives>();
 
@@ -46,6 +44,16 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
+        livesText.text = "Lives: " + lives.ToString();
+
+        enemiesKilled.text = "Enemies: " + currentEnemiesKilled.ToString() + "/" + maxEnemiesToKill.ToString();
+        collectableScore.text = "Collectables: " + currentCollectables.ToString() + "/" + maxCollectables.ToString();
+
+        currentTime -= Time.deltaTime;
+        timer.text = "Time: " + System.Math.Round(currentTime, 2) + "/" + System.Math.Round(maxTime, 2);
+
+        scoreText.text = "Current Score: " + score.ToString();
+
         if (lives < 0)
         {
             player.enabled = false;
@@ -63,17 +71,5 @@ public class LevelManager : MonoBehaviour
         {
             playerCam.isFollowing = false;
         }
-
-        playerHealth.value = pHealth.currentHealth;
-        livesText.text = "Lives: " + lives.ToString();
-
-        enemiesKilled.text = currentEnemiesKilled.ToString() + "/" + maxEnemiesToKill.ToString();
-        collectableScore.text = currentCollectables.ToString() + "/" + maxCollectables.ToString();
-
-        currentTime -= Time.deltaTime;
-        timer.text = System.Math.Round(currentTime, 2) + "/" + System.Math.Round(maxTime, 2);
-
-        scoreText.text = score.ToString();
     }
-
 }
