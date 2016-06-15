@@ -4,9 +4,9 @@ using System.Collections;
 
 public class UIBehaviour : MonoBehaviour
 {
-    public void LoadLevel()
+    public void PlayAgain()
     {
-        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex );
+        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public void QuitGame()
@@ -16,7 +16,7 @@ public class UIBehaviour : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex );
+        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex);
     }
 
 }

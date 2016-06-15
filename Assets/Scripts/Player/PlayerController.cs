@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if(other.gameObject.CompareTag("EndFlag") && keyPickedUp == true)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
         if (other.gameObject.CompareTag("DeathZone"))
         {

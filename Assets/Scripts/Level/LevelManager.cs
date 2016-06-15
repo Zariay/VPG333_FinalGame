@@ -7,29 +7,28 @@ public class LevelManager : MonoBehaviour
     PlayerController player;
     public int lives = 3;
     UnityStandardAssets._2D.Camera2DFollow playerCam;
-    public static Text livesText;
-    public static LevelManager instance;
+    public Text livesText;
+    public LevelManager instance;
 
-    public static int maxCollectables = 3;
-    public static int currentCollectables;
+    public int maxCollectables = 3;
+    public int currentCollectables;
     public Text collectableScore;
 
-    public static int maxEnemiesToKill;
-    public static int currentEnemiesKilled;
-    public static Text enemiesKilled;
+    public int maxEnemiesToKill;
+    public int currentEnemiesKilled;
+    public Text enemiesKilled;
 
-    public static float maxTime;
-    public static float currentTime;
-    public static Text timer;
+    public float maxTime;
+    public float currentTime;
+    public Text timer;
 
-    public static int score;
-    public static Text scoreText;
+    public int score;
+    public Text scoreText;
 
     void Start()
     {
         if (instance == null)
             instance = this;
-
         else if (instance != this)
             Destroy(gameObject);
 
