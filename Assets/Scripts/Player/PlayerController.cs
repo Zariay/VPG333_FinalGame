@@ -141,8 +141,6 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
         }
 
-        if (other.gameObject.CompareTag("DeathZone"))
-            transform.GetComponent<PlayerHealth>().Death();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -166,10 +164,10 @@ public class PlayerController : MonoBehaviour
         }
 
         if(other.gameObject.CompareTag("EndFlag") && keyPickedUp == true)
-        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
+    
+        if (other.gameObject.CompareTag("DeathZone"))
+            transform.GetComponent<PlayerHealth>().Death();
     }
 
     void Flip()
