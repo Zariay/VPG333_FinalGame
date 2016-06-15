@@ -124,28 +124,34 @@ public class PlayerController : MonoBehaviour
         rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed);
     }
 
-    void OnCollisionEnter2D( Collision2D col )
+    void OnCollisionEnter2D( Collision2D other )
     {
-        if( col.gameObject.CompareTag( "ground" ) )
+        if( other.gameObject.CompareTag( "ground" ) )
             grounded = true;
 
-        if(col.gameObject.CompareTag("GroundEnemy"))
-            col.gameObject.GetComponent<Rigidbody2D>().AddForce(knockBackForce);
+        if(other.gameObject.CompareTag("GroundEnemy"))
+            other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockBackForce);
 
-        if(col.gameObject.CompareTag("Bounce"))
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), col.gameObject.GetComponent<Collider2D>(), true);
+        if(other.gameObject.CompareTag("Bounce"))
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>(), true);
 
-        if (col.gameObject.CompareTag("DoubleJump"))
+        if (other.gameObject.CompareTag("DoubleJump"))
+        {
             doubleJumpEnabled = true;
-
-        if (col.gameObject.CompareTag("FireBall"))
+            other.gameObject.SetActive(false);
+        }
+            
+        if (other.gameObject.CompareTag("FireBall"))
+        {
             fireBallEnabled = true;
+            other.gameObject.SetActive(false);
+        }   
 
-        if (col.gameObject.CompareTag("DeathZone"))
+        if (other.gameObject.CompareTag("DeathZone"))
             transform.GetComponent<PlayerHealth>().Death();
     }
 
-    void OnTriggerEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("PickUp"))
         {
