@@ -9,6 +9,8 @@ TagManager:
   - FlyingEnemy
   - GroundEnemy
   - Bounce
+  - PickUp
+  - DeathZone
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - Background
   - Enemy
   - Bounce
-  - 
+  - Bullet
   - 
   - 
   - 
