@@ -4,8 +4,6 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public int lives = 3;
-
     public bool facingRight;
     public bool keyPickedUp;
     public bool isDead = false;
@@ -171,7 +169,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("DeathZone"))
         {
             isDead = true;
-            lives--;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
             

@@ -22,7 +22,7 @@ public class GroundEnemyController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerController>().lives--;
+            other.gameObject.GetComponent<LevelManager>().lives--;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
            

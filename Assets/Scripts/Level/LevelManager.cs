@@ -5,10 +5,12 @@ using System.Collections;
 public class LevelManager : MonoBehaviour
 {
     PlayerController player;
+    public int lives = 3;
     PlayerHealth pHealth;
     UnityStandardAssets._2D.Camera2DFollow playerCam;
     Objectives objectives;
     public Text livesText;
+    public static LevelManager instance;
 
     public Slider playerHealth;
     void Start()
@@ -17,11 +19,19 @@ public class LevelManager : MonoBehaviour
         pHealth = player.GetComponent<PlayerHealth>();
         playerCam = FindObjectOfType<UnityStandardAssets._2D.Camera2DFollow>();
         objectives = FindObjectOfType<Objectives>();
+
+        if (instance == null)
+            instance = this;
+
+        else if (instance != this)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(transform.gameObject);
     }
 
     void Update()
     {
-        if (player.lives < 0)
+        if (lives < 0)
         {
             player.enabled = false;
             playerCam.isFollowing = false;
@@ -40,7 +50,7 @@ public class LevelManager : MonoBehaviour
         }
 
         playerHealth.value = pHealth.currentHealth;
-        livesText.text = "Lives: " + player.lives.ToString();
+        livesText.text = "Lives: " + lives.ToString();
     }
 
 }
