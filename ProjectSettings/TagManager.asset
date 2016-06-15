@@ -16,6 +16,7 @@ TagManager:
   - Key
   - EndFlag
   - Collectable
+  - BreakableBlock
   layers:
   - Default
   - TransparentFX
