@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class FlyingEnemyController : MonoBehaviour
@@ -25,8 +26,8 @@ public class FlyingEnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
             other.gameObject.GetComponent<PlayerController>().lives--;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         } 
     }
 

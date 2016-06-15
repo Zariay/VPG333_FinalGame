@@ -49,5 +49,7 @@ public class FinalScore : MonoBehaviour
 
         finalScore = objectives.score + enemyScore + collectableScore;
         finalScoreText.text = finalScore.ToString();
+
+        if(finalScore > )
     }
 }

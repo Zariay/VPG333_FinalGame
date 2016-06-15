@@ -170,9 +170,9 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("DeathZone"))
         {
-            Destroy(this.gameObject);
             isDead = true;
             lives--;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
             
     }

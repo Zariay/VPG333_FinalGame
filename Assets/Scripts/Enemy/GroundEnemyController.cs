@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GroundEnemyController : MonoBehaviour
@@ -21,8 +22,8 @@ public class GroundEnemyController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
             other.gameObject.GetComponent<PlayerController>().lives--;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
            
     }
