@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public bool facingRight;
     public bool keyPickedUp;
+    public bool isDead = false;
     //jumping
     #region
     public bool doubleJump = false;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         knockBackForce = new Vector2(knockBackSpeed, 0);
         objectives = FindObjectOfType<Objectives>();
+        isDead = false;
     }
 
     void Update()
@@ -165,18 +167,15 @@ public class PlayerController : MonoBehaviour
 
         if(other.gameObject.CompareTag("EndFlag") && keyPickedUp == true)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    
+
         if (other.gameObject.CompareTag("DeathZone"))
-            transform.GetComponent<PlayerHealth>().Death();
+        {
+            Destroy(this.gameObject);
+            isDead = true;
+        }
+            
     }
 
-    void Flip()
-    {
-        facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
-    }
 }
 
 

@@ -33,6 +33,11 @@ public class LevelManager : MonoBehaviour
             objectives.currentTime = 0.0f;
         }
 
+        if(player.isDead == true)
+        {
+            playerCam.isFollowing = false;
+        }
+
         playerHealth.value = pHealth.currentHealth;
     }
 
