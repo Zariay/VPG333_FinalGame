@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     public float knockBackSpeed;
     public Transform groundCheck;
 
-
     private bool grounded = false;
     private Rigidbody2D rb2d;
     private Vector2 knockBackForce;
