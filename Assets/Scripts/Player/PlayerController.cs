@@ -136,7 +136,11 @@ public class PlayerController : MonoBehaviour
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), col.gameObject.GetComponent<Collider2D>(), true);
 
         if (col.gameObject.CompareTag("DoubleJump"))
+        {
             doubleJumpEnabled = true;
+            col.gameObject.SetActive(false);
+        }
+           
 
         if (col.gameObject.CompareTag("FireBall"))
             fireBallEnabled = true;
