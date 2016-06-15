@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("PickUp"))
         {
             Destroy(other.gameObject);
-            instance.score += 5;
+            instance.score += 10;
         }
 
         if(other.gameObject.CompareTag("Collectable"))
