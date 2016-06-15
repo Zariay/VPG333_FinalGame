@@ -29,10 +29,6 @@ public class LevelManager : MonoBehaviour
     public Slider playerHealth;
     void Start()
     {
-        player = FindObjectOfType<PlayerController>();
-        playerCam = FindObjectOfType<UnityStandardAssets._2D.Camera2DFollow>();
-        objectives = FindObjectOfType<Objectives>();
-
         if (instance == null)
             instance = this;
 
@@ -40,6 +36,10 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(transform.gameObject);
+
+        player = FindObjectOfType<PlayerController>();
+        playerCam = FindObjectOfType<UnityStandardAssets._2D.Camera2DFollow>();
+        objectives = FindObjectOfType<Objectives>();
     }
 
     void Update()
