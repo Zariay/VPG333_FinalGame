@@ -52,12 +52,6 @@ public class EnemyAttack : MonoBehaviour
         if (playerHealth.currentHealth > 0)
         {
             playerHealth.TakeDamage(attackDamage);
-            player.knockbackCount = player.knockbackLength;
-
-            if (player.transform.position.x < transform.position.x)
-                player.knockFromRight = true;
-            else
-                player.knockFromRight = false;
         }
     }
 }
