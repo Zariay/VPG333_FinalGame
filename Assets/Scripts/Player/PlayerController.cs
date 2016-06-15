@@ -159,6 +159,12 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             objectives.score += 5;
         }
+
+        if(other.gameObject.CompareTag("Collectable"))
+        {
+            Destroy(other.gameObject);
+            objectives.currentCollectables++;
+        }
     }
 
     void Flip()

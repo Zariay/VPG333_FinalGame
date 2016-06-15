@@ -39,6 +39,10 @@ public class BulletDamage : MonoBehaviour
             other.GetComponent<EnemyHealth>().SendMessage("TakeDamage", damage);
         }*/
            
-       
+       if(other.CompareTag("BreakableBlock"))
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
     }
 }
