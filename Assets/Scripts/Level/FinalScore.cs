@@ -21,6 +21,10 @@ public class FinalScore : MonoBehaviour
     void Start()
     {
        instance = FindObjectOfType<LevelManager>();
+        instance.livesText.CrossFadeAlpha(0.0f, 0.0f, false);
+        instance.scoreText.CrossFadeAlpha(0.0f, 0.0f, false);
+        instance.collectableScore.CrossFadeAlpha(0.0f, 0.0f, false);
+        instance.enemiesKilled.CrossFadeAlpha(0.0f, 0.0f, false);
     }
 
     // Update is called once per frame
