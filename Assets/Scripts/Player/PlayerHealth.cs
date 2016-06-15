@@ -36,11 +36,12 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void Death()
+    public void Death()
     {
         isDead = true;
 
         anim.SetTrigger( "Die" );
+        FindObjectOfType<UnityStandardAssets._2D.Camera2DFollow>().isFollowing = false;
         player.enabled = false;
     }
 }

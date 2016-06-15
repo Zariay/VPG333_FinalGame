@@ -5,8 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public int lives = 3;
 
-    [HideInInspector]
-    public bool facingRight = true;
+    public bool facingRight;
     //jumping
     #region
     public bool doubleJump = false;
@@ -32,8 +31,6 @@ public class PlayerController : MonoBehaviour
 
     private bool grounded = false;
     private Rigidbody2D rb2d;
-    private Vector2 moveForce;
-    private Vector2 jumpForce;
     private Vector2 knockBackForce;
 
     //player knockback
@@ -49,8 +46,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        jumpForce = new Vector2( 0, jumpSpeed );
-        moveForce = new Vector2( moveSpeed, 0 );
         knockBackForce = new Vector2(knockBackSpeed, 0);
         objectives = FindObjectOfType<Objectives>();
     }
@@ -59,14 +54,32 @@ public class PlayerController : MonoBehaviour
     {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
+        //Moving
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb2d.velocity = new Vector2(-moveSpeed, rb2d.velocity.y);
+            facingRight = false;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
+            facingRight = true;
+        }
+        else
+            rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
+
+        if (rb2d.velocity.x < 0)
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        else if (rb2d.velocity.x > 0)
+            transform.localScale = new Vector3(1f, 1f, 1f);
+
         //Jumping
         #region
         if (doubleJumpEnabled == false)
         {
             if (Input.GetButtonDown("Jump") && grounded)
             {
-                rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-                rb2d.AddForce(jumpForce);
+                Jump();
             }
         }
         else
@@ -75,16 +88,14 @@ public class PlayerController : MonoBehaviour
             {
                 if(grounded == true)
                 {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-                    rb2d.AddForce(jumpForce);
+                    Jump();
                     doubleJump = true;
                 }
                 else
                 {
                     if (doubleJump == true)
-                    { 
-                        rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-                        rb2d.AddForce(jumpForce);
+                    {
+                        Jump();
                         doubleJump = false;
                     }
                 }
@@ -104,56 +115,49 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
-        
-        if(knockbackCount <= 0)
-        {
-            if (h * rb2d.velocity.x < maxSpeed)
-                rb2d.AddForce(h * moveForce, ForceMode2D.Impulse);
-        }
-        else
-        {
-            if(knockFromRight)
-                rb2d.velocity = new Vector2(-knockback, 1f);
-
-            if (!knockFromRight)
-                rb2d.velocity = new Vector2(knockback, 1f);
-        }
-
         if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
             rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
-        else if (h == 0)
-        {
-            if (rb2d.velocity.x <= maxSpeed)
-            {
-                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-            }
-            if (rb2d.velocity.x >= maxSpeed)
-            {
-                rb2d.velocity = Vector2.zero;
-            }
-        }
     }
 
-    void OnCollisionEnter2D( Collision2D col )
+    void Jump()
     {
-        if( col.gameObject.CompareTag( "ground" ) )
+        rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed);
+    }
+
+    void OnCollisionEnter2D( Collision2D other )
+    {
+        if( other.gameObject.CompareTag( "ground" ) )
             grounded = true;
 
-        if (col.gameObject.CompareTag("PickUp"))
-            Destroy(col.gameObject);
+        if(other.gameObject.CompareTag("GroundEnemy"))
+            other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockBackForce);
 
-        if(col.gameObject.CompareTag("GroundEnemy"))
-            col.gameObject.GetComponent<Rigidbody2D>().AddForce(knockBackForce);
+        if(other.gameObject.CompareTag("Bounce"))
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), other.gameObject.GetComponent<Collider2D>(), true);
 
-        if(col.gameObject.CompareTag("Bounce"))
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), col.gameObject.GetComponent<Collider2D>(), true);
-
-        if (col.gameObject.CompareTag("DoubleJump"))
+        if (other.gameObject.CompareTag("DoubleJump"))
+        {
             doubleJumpEnabled = true;
-
-        if (col.gameObject.CompareTag("FireBall"))
+            other.gameObject.SetActive(false);
+        }
+            
+        if (other.gameObject.CompareTag("FireBall"))
+        {
             fireBallEnabled = true;
+            other.gameObject.SetActive(false);
+        }   
+
+        if (other.gameObject.CompareTag("DeathZone"))
+            transform.GetComponent<PlayerHealth>().Death();
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            Destroy(other.gameObject);
+            objectives.score += 5;
+        }
     }
 
     void Flip()

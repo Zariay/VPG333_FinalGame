@@ -20,4 +20,9 @@ public class FlyingEnemyController : MonoBehaviour
         if (playerInRange)
             transform.Translate(Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime));
     }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, playerRange);
+    }
 }

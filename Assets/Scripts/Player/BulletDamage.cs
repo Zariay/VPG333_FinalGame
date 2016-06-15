@@ -16,7 +16,7 @@ public class BulletDamage : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         rigidbody2D = GetComponent<Rigidbody2D>();
 
-        if (player.transform.localScale.x < 0)
+        if (player.facingRight == false)
             speed = -speed;
     }
 
@@ -30,13 +30,15 @@ public class BulletDamage : MonoBehaviour
         if (other.CompareTag("GroundEnemy") || other.CompareTag("FlyingEnemy"))
         {
             Destroy(other.gameObject);
+            Destroy(this.gameObject);
+            objectives.currentEnemiesKilled++;
         }
 
-        if (other.CompareTag("Boss"))
+        /*if (other.CompareTag("Boss"))
         {
             other.GetComponent<EnemyHealth>().SendMessage("TakeDamage", damage);
-        }
+        }*/
            
-        Destroy(this.gameObject);
+       
     }
 }
