@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed;
     public float maxSpeed = 5f;
-    public float jumpSpeed;
+    public float jumpSpeed = 37;
     public float knockBackSpeed;
     public Transform groundCheck;
 
@@ -32,14 +32,6 @@ public class PlayerController : MonoBehaviour
     private bool grounded = false;
     private Rigidbody2D rb2d;
     private Vector2 knockBackForce;
-
-    //player knockback
-    #region
-    public float knockback;
-    public float knockbackLength;
-    public float knockbackCount;
-    public bool knockFromRight;
-    #endregion
 
     Objectives objectives;
 
