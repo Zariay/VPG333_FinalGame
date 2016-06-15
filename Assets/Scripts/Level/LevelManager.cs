@@ -7,26 +7,24 @@ public class LevelManager : MonoBehaviour
     PlayerController player;
     public int lives = 3;
     UnityStandardAssets._2D.Camera2DFollow playerCam;
-    Objectives objectives;
-    public Text livesText;
+    public static Text livesText;
     public static LevelManager instance;
 
-    public int maxCollectables = 3;
-    public int currentCollectables;
+    public static int maxCollectables = 3;
+    public static int currentCollectables;
     public Text collectableScore;
 
-    public int maxEnemiesToKill;
-    public int currentEnemiesKilled;
-    public Text enemiesKilled;
+    public static int maxEnemiesToKill;
+    public static int currentEnemiesKilled;
+    public static Text enemiesKilled;
 
-    public float maxTime;
-    public float currentTime;
-    public Text timer;
+    public static float maxTime;
+    public static float currentTime;
+    public static Text timer;
 
-    public int score;
-    public Text scoreText;
+    public static int score;
+    public static Text scoreText;
 
-    public Slider playerHealth;
     void Start()
     {
         if (instance == null)
@@ -39,7 +37,6 @@ public class LevelManager : MonoBehaviour
 
         player = FindObjectOfType<PlayerController>();
         playerCam = FindObjectOfType<UnityStandardAssets._2D.Camera2DFollow>();
-        objectives = FindObjectOfType<Objectives>();
     }
 
     void Update()
