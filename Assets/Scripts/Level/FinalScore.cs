@@ -34,7 +34,7 @@ public class FinalScore : MonoBehaviour
             objectivesCount++;
             enemyScoreText.text = enemyScore.ToString();
         }
-        
+
         collectableScore = objectives.currentCollectables * 50;
         collectableScoreText.text = collectableScore.ToString();
         if (objectives.currentCollectables == objectives.maxCollectables)
@@ -45,11 +45,10 @@ public class FinalScore : MonoBehaviour
         }
 
         objectivesScore = objectivesCount * 1000;
-        objectivesScoreText.text = objectivesScore.ToString(); 
+        objectivesScoreText.text = objectivesScore.ToString();
 
         finalScore = objectives.score + enemyScore + collectableScore;
         finalScoreText.text = finalScore.ToString();
 
-        if(finalScore > )
     }
 }
