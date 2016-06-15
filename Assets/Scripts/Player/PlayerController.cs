@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
             transform.GetComponent<PlayerHealth>().Death();
     }
 
-    void OnTriggerEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("PickUp"))
         {
