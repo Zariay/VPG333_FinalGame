@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     PlayerHealth pHealth;
     UnityStandardAssets._2D.Camera2DFollow playerCam;
     Objectives objectives;
+    public Text livesText;
 
     public Slider playerHealth;
     void Start()
@@ -39,6 +40,7 @@ public class LevelManager : MonoBehaviour
         }
 
         playerHealth.value = pHealth.currentHealth;
+        livesText.text = "Lives: " + player.lives.ToString();
     }
 
 }

@@ -20,6 +20,10 @@ public class GroundEnemyController : MonoBehaviour
             moveSpeed *= -1;
 
         if (other.gameObject.CompareTag("Player"))
+        {
             Destroy(other.gameObject);
+            other.gameObject.GetComponent<PlayerController>().lives--;
+        }
+           
     }
 }
