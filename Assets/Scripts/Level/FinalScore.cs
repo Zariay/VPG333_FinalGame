@@ -36,7 +36,7 @@ public class FinalScore : MonoBehaviour
         {
             enemyScore += bonus;
             objectivesCount++;
-            enemyScoreText.text = enemyScore.ToString();
+            enemyScoreText.text = "Enemies Killed Score: " + enemyScore.ToString();
         }
 
         collectableScore = instance.currentCollectables * 50;
@@ -45,14 +45,14 @@ public class FinalScore : MonoBehaviour
         {
             collectableScore += bonus;
             objectivesCount++;
-            collectableScoreText.text = collectableScore.ToString();
+            collectableScoreText.text = "Collectables Score: " + collectableScore.ToString();
         }
 
         objectivesScore = objectivesCount * 1000;
-        objectivesScoreText.text = objectivesScore.ToString();
+        objectivesScoreText.text = "Objectives Completed Score: " + objectivesScore.ToString();
 
         finalScore = instance.score + enemyScore + collectableScore;
-        finalScoreText.text = finalScore.ToString();
+        finalScoreText.text = "Final Score: " + finalScore.ToString();
 
     }
 }
