@@ -60,11 +60,11 @@ public class LevelManager : MonoBehaviour
             playerCam.isFollowing = false;
         }
 
-        if(objectives.currentTime <= 0.0f)
+        if(currentTime <= 0.0f)
         {
             player.enabled = false;
             playerCam.isFollowing = false;
-            objectives.currentTime = 0.0f;
+            currentTime = 0.0f;
         }
 
         if(player.isDead == true)
