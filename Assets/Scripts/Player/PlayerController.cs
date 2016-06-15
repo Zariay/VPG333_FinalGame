@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour
@@ -6,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public int lives = 3;
 
     public bool facingRight;
+    public bool keyPickedUp;
     //jumping
     #region
     public bool doubleJump = false;
@@ -138,7 +140,6 @@ public class PlayerController : MonoBehaviour
             fireBallEnabled = true;
             other.gameObject.SetActive(false);
         }
-            
 
         if (other.gameObject.CompareTag("DeathZone"))
             transform.GetComponent<PlayerHealth>().Death();
@@ -157,6 +158,18 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             objectives.currentCollectables++;
         }
+
+        if(other.gameObject.CompareTag("Key"))
+        {
+            Destroy(other.gameObject);
+            keyPickedUp = true;
+        }
+
+        if(other.gameObject.CompareTag("EndFlag") && keyPickedUp == true)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
     }
 
     void Flip()
