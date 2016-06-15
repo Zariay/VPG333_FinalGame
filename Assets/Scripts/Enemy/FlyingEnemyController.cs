@@ -21,6 +21,12 @@ public class FlyingEnemyController : MonoBehaviour
             transform.Translate(Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime));
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+            Destroy(other.gameObject);
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, playerRange);

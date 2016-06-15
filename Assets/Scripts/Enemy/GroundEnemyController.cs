@@ -18,5 +18,8 @@ public class GroundEnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bounce"))
             moveSpeed *= -1;
+
+        if (other.gameObject.CompareTag("Player"))
+            Destroy(other.gameObject);
     }
 }
