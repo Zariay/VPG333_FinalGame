@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D( Collision2D other )
     {
-        if( other.gameObject.CompareTag( "ground" ) )
+        if(other.gameObject.CompareTag( "ground" ) )
             grounded = true;
 
         if(other.gameObject.CompareTag("GroundEnemy"))
@@ -140,18 +140,19 @@ public class PlayerController : MonoBehaviour
             doubleJumpEnabled = true;
             other.gameObject.SetActive(false);
         }
-            
+           
         if (other.gameObject.CompareTag("FireBall"))
         {
             fireBallEnabled = true;
             other.gameObject.SetActive(false);
-        }   
+        }
+            
 
         if (other.gameObject.CompareTag("DeathZone"))
             transform.GetComponent<PlayerHealth>().Death();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("PickUp"))
         {
