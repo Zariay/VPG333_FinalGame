@@ -11,6 +11,10 @@ TagManager:
   - Bounce
   - PickUp
   - DeathZone
+  - DoubleJump
+  - FireBall
+  - Key
+  - EndFlag
   layers:
   - Default
   - TransparentFX
