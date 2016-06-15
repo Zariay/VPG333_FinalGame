@@ -34,13 +34,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector2 knockBackForce;
 
-    Objectives objectives;
+    LevelManager instance;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         knockBackForce = new Vector2(knockBackSpeed, 0);
-        objectives = FindObjectOfType<Objectives>();
+        instance = FindObjectOfType<LevelManager>();
         isDead = false;
     }
 
@@ -148,13 +148,13 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("PickUp"))
         {
             Destroy(other.gameObject);
-            objectives.score += 5;
+            instance.score += 5;
         }
 
         if(other.gameObject.CompareTag("Collectable"))
         {
             Destroy(other.gameObject);
-            objectives.currentCollectables++;
+            instance.currentCollectables++;
         }
 
         if(other.gameObject.CompareTag("Key"))
@@ -169,6 +169,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("DeathZone"))
         {
             isDead = true;
+            instance.lives--;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
             

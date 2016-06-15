@@ -15,29 +15,29 @@ public class FinalScore : MonoBehaviour
     public Text finalScoreText;
     int bonus = 500;
 
-    Objectives objectives;
+    LevelManager instance;
 
     // Use this for initialization
     void Start()
     {
-        objectives = FindObjectOfType<Objectives>();
+       instance = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        enemyScore = objectives.currentEnemiesKilled * 10;
+        enemyScore = instance.currentEnemiesKilled * 10;
         enemyScoreText.text = enemyScore.ToString();
-        if (objectives.currentEnemiesKilled == objectives.maxEnemiesToKill)
+        if (instance.currentEnemiesKilled == instance.maxEnemiesToKill)
         {
             enemyScore += bonus;
             objectivesCount++;
             enemyScoreText.text = enemyScore.ToString();
         }
 
-        collectableScore = objectives.currentCollectables * 50;
+        collectableScore = instance.currentCollectables * 50;
         collectableScoreText.text = collectableScore.ToString();
-        if (objectives.currentCollectables == objectives.maxCollectables)
+        if (instance.currentCollectables == instance.maxCollectables)
         {
             collectableScore += bonus;
             objectivesCount++;
@@ -47,7 +47,7 @@ public class FinalScore : MonoBehaviour
         objectivesScore = objectivesCount * 1000;
         objectivesScoreText.text = objectivesScore.ToString();
 
-        finalScore = objectives.score + enemyScore + collectableScore;
+        finalScore = instance.score + enemyScore + collectableScore;
         finalScoreText.text = finalScore.ToString();
 
     }

@@ -12,6 +12,21 @@ public class LevelManager : MonoBehaviour
     public Text livesText;
     public static LevelManager instance;
 
+    public int maxCollectables = 3;
+    public int currentCollectables;
+    public Text collectableScore;
+
+    public int maxEnemiesToKill;
+    public int currentEnemiesKilled;
+    public Text enemiesKilled;
+
+    public float maxTime;
+    public float currentTime;
+    public Text timer;
+
+    public int score;
+    public Text scoreText;
+
     public Slider playerHealth;
     void Start()
     {
@@ -51,6 +66,14 @@ public class LevelManager : MonoBehaviour
 
         playerHealth.value = pHealth.currentHealth;
         livesText.text = "Lives: " + lives.ToString();
+
+        enemiesKilled.text = currentEnemiesKilled.ToString() + "/" + maxEnemiesToKill.ToString();
+        collectableScore.text = currentCollectables.ToString() + "/" + maxCollectables.ToString();
+
+        currentTime -= Time.deltaTime;
+        timer.text = System.Math.Round(currentTime, 2) + "/" + System.Math.Round(maxTime, 2);
+
+        scoreText.text = score.ToString();
     }
 
 }

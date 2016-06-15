@@ -4,7 +4,7 @@ using System.Collections;
 public class BulletDamage : MonoBehaviour
 {
     public int damage = 2;
-    Objectives objectives;
+    LevelManager instance;
 
     PlayerController player;
     public float speed;
@@ -12,7 +12,7 @@ public class BulletDamage : MonoBehaviour
 
     void Start()
     {
-        objectives = FindObjectOfType<Objectives>();
+        instance = FindObjectOfType<LevelManager>();
         player = FindObjectOfType<PlayerController>();
         rigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -31,7 +31,7 @@ public class BulletDamage : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
-            objectives.currentEnemiesKilled++;
+            instance.currentEnemiesKilled++;
         }
 
         /*if (other.CompareTag("Boss"))
@@ -39,6 +39,10 @@ public class BulletDamage : MonoBehaviour
             other.GetComponent<EnemyHealth>().SendMessage("TakeDamage", damage);
         }*/
            
-       
+       if(other.CompareTag("BreakableBlock"))
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
     }
 }
