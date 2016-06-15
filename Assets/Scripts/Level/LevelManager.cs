@@ -36,6 +36,8 @@ public class LevelManager : MonoBehaviour
 
         player = FindObjectOfType<PlayerController>();
         playerCam = FindObjectOfType<UnityStandardAssets._2D.Camera2DFollow>();
+
+        currentTime = maxTime;
     }
 
     void Update()
